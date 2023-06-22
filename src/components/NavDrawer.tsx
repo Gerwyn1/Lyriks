@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
-import { Box, Drawer, List, ListItem } from "@mui/material";
-import { Theme, useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { Box, Drawer, List, ListItem, SxProps, Theme } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 import AudiotrackOutlinedIcon from "@mui/icons-material/AudiotrackOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -16,58 +15,34 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
 import CreateSvgIcon from "@/components/CreateSvgIcon";
+import { themedStyles } from "@/themeStyles/themeStyles";
 
-const themedStyles = (theme: Theme, mobileResponsiveWidth: string | number) => {
-  return {
-    drawer: {
-      "& .MuiBackdrop-root": {
-        display: "none",
-      },
-    },
-    drawerPaper: {
-      width: mobileResponsiveWidth,
-      backgroundColor: "#131313",
-      overflowX: "hidden",
-    },
-    list: {
-      minHeight: "100vh",
-    },
-    listItem: {
-      p: "6px",
-      width: theme.spacing(5),
-      height: theme.spacing(5),
-    },
-  };
-};
+interface NavDrawerProps {
+  responsiveDrawerWidth: number;
+}
 
-export default function NavDrawer() {
+export default function NavDrawer({ responsiveDrawerWidth }: NavDrawerProps) {
   const [selectIcon, setSelectIcon] = useState("Home Icon");
-
   const theme = useTheme();
-
-  const greaterThan375 = useMediaQuery("(min-width:376px)");
-  const drawerWidth = 120;
-  const responsiveDrawerWidth = greaterThan375 ? drawerWidth : drawerWidth - 40;
 
   return (
     <Drawer
       disableEnforceFocus={false}
+      variant="permanent"
       open
-      sx={themedStyles(theme, responsiveDrawerWidth).drawer}
+      sx={themedStyles().drawer}
       PaperProps={{
-        sx: themedStyles(theme, responsiveDrawerWidth).drawerPaper,
+        sx: themedStyles(theme, responsiveDrawerWidth)
+          .drawerPaper as SxProps<Theme>,
       }}
     >
       <Box display="flex" justifyContent="center">
-        <List sx={themedStyles(theme, responsiveDrawerWidth).list}>
-          {/* first item */}
+        <List sx={themedStyles().list}>
           <ListItem
             sx={{
               "& .MuiSvgIcon-root": {
-                color: "#fff",
-                borderRadius: "50%",
-                backgroundColor: "#00B3FF",
-                ...themedStyles(theme, responsiveDrawerWidth).listItem,
+                ...themedStyles().firstListItem,
+                ...themedStyles(theme).listItem,
               },
             }}
           >
@@ -121,8 +96,8 @@ export default function NavDrawer() {
               key={nav.text}
               sx={{
                 "& .MuiSvgIcon-root": {
+                  ...themedStyles(theme).listItem,
                   color: selectIcon === nav.text ? "#fff" : "#898989",
-                  ...themedStyles(theme, responsiveDrawerWidth).listItem,
                 },
               }}
               onClick={() => setSelectIcon(nav.text)}
@@ -130,15 +105,14 @@ export default function NavDrawer() {
               <Link href={nav.route}>{nav.icon}</Link>
             </ListItem>
           ))}
-          {/* last item */}
           <ListItem
             sx={{
               position: "absolute",
               bottom: 5,
               "& .MuiSvgIcon-root": {
+                ...themedStyles().lastListItem,
+                ...themedStyles(theme).listItem,
                 color: selectIcon === "Exit Icon" ? "#fff" : "#898989",
-                transform: "rotate(180deg)",
-                ...themedStyles(theme, responsiveDrawerWidth).listItem,
               },
             }}
             onClick={() => setSelectIcon("Exit Icon")}

@@ -1,10 +1,22 @@
-import Head from 'next/head'
-import { Inter } from 'next/font/google'
-import NavDrawer from '@/components/NavDrawer'
+import Head from "next/head";
+import { Inter } from "next/font/google";
+import { Box, useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
-const inter = Inter({ subsets: ['latin'] })
+import { themedStyles } from "@/themeStyles/themeStyles";
+import NavDrawer from "@/components/NavDrawer";
+import SearchField from "@/components/SearchField";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const theme = useTheme();
+
+  const greaterThan480 = useMediaQuery(theme.breakpoints.up("xs"));
+  
+  const drawerWidth = 120;
+  const responsiveDrawerWidth = greaterThan480 ? drawerWidth : drawerWidth - 40;
+
   return (
     <>
       <Head>
@@ -13,7 +25,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NavDrawer/>
+      <main>
+        <NavDrawer responsiveDrawerWidth={responsiveDrawerWidth} />
+        <Box
+          mt={2}
+          style={{
+            ...themedStyles(theme, responsiveDrawerWidth).content,
+            ...themedStyles(theme, responsiveDrawerWidth).contentShift,
+          }}
+        >
+          <SearchField />
+        </Box>
+      </main>
     </>
-  )
+  );
 }

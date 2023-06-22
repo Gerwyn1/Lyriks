@@ -1,0 +1,43 @@
+.autoCompleteListbox::-webkit-scrollbar {
+  width: 12px;
+  background-color: #0c0c0e;
+}
+
+.autoCompleteListbox::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #8c8c8c;
+}
+
+.autoCompleteListbox::-moz-scrollbar {
+  width: 12px;
+  background-color: #0c0c0e;
+}
+
+.autoCompleteListbox::-moz-scrollbar-thumb {
+  border-radius: 5px;
+  -moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #8c8c8c;
+}
+
+.autoCompleteListbox::-ms-scrollbar {
+  width: 12px;
+  background-color: #0c0c0e;
+}
+
+.autoCompleteListbox::-ms-scrollbar-thumb {
+  border-radius: 5px;
+  -ms-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #8c8c8c;
+}
+
+.autoCompleteListbox::-o-scrollbar {
+  width: 12px;
+  background-color: #0c0c0e;
+}
+
+.autoCompleteListbox::-o-scrollbar-thumb {
+  border-radius: 5px;
+  -o-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #8c8c8c;
+}
