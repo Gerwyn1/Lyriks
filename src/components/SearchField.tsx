@@ -7,7 +7,9 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
+  AutocompleteRenderOptionState,
 } from "@mui/material";
+import { styled } from "@mui/system";
 
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 
@@ -61,22 +63,60 @@ const top100Films = [
   { title: "Saving Private Ryan", year: 1998 },
 ];
 
+interface Film {
+  title: string;
+  year: number;
+}
+
+const OptionListStyle = styled("ul")({
+  backgroundColor: "#252525",
+});
+
+const OptionStyle = styled("li")({
+  "&:hover": {
+    backgroundColor: "#555555 !important",
+  },
+});
+
+const renderOption = (
+  props: React.HTMLAttributes<HTMLLIElement>,
+  title: Film["title"],
+  state: AutocompleteRenderOptionState
+) => (
+  <OptionStyle
+    sx={{
+      backgroundColor: state.selected
+        ? "#333333 !important"
+        : "#252525 !important",
+      color: "white",
+    }}
+    {...props}
+  >
+    {title}
+  </OptionStyle>
+);
+
 export default function SearchField(props: TextFieldProps) {
   const theme = useTheme();
   const lessThan425 = useMediaQuery(theme.breakpoints.down("xxs"));
   const lessThan480 = useMediaQuery(theme.breakpoints.down("xs"));
   const [inputValue, setInputValue] = useState("");
+
   return (
     <>
       <Autocomplete
         size={lessThan480 ? "small" : "medium"}
         inputValue={inputValue}
-        onInputChange={(event, newValue) => {
+        onInputChange={(
+          event: React.SyntheticEvent<Element, Event>,
+          newValue
+        ) => {
           setInputValue(newValue);
         }}
         id="search-for-song"
         freeSolo={false}
-        options={top100Films.map((option) => option.title)}
+        options={top100Films.map((film) => film.title)}
+        renderOption={renderOption}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -90,7 +130,10 @@ export default function SearchField(props: TextFieldProps) {
                 <Typography
                   sx={{
                     [theme.breakpoints.down("xxs")]: { fontSize: ".8rem" },
-                    [theme.breakpoints.down("xxxs")]: { fontSize: "0.6rem", mt:.5 },
+                    [theme.breakpoints.down("xxxs")]: {
+                      fontSize: "0.6rem",
+                      mt: 0.5,
+                    },
                   }}
                 >
                   Search for song, artist, lyrics...
@@ -99,6 +142,7 @@ export default function SearchField(props: TextFieldProps) {
             }
           />
         )}
+        ListboxComponent={OptionListStyle}
         ListboxProps={{
           className: styles.autoCompleteListbox,
         }}
@@ -124,6 +168,7 @@ export default function SearchField(props: TextFieldProps) {
             ml: 1,
             // fontSize: lessthan380 ? "0.7rem" : lessThan480 ? "0.8rem" : "1rem",
           },
+          // test
         }}
       />
     </>
