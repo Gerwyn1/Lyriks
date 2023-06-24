@@ -68,50 +68,50 @@ interface Film {
   year: number;
 }
 
-const OptionListStyle = styled("ul")({
-  backgroundColor: "#252525",
-});
-
-const OptionStyle = styled("li")({
-  "&:hover": {
-    backgroundColor: "#555555 !important",
-  },
-});
-
-const renderOption = (
-  props: React.HTMLAttributes<HTMLLIElement>,
-  title: Film["title"],
-  state: AutocompleteRenderOptionState
-) => (
-  <OptionStyle
-    sx={{
-      backgroundColor: state.selected
-        ? "#333333 !important"
-        : "#252525 !important",
-      color: "white",
-    }}
-    {...props}
-  >
-    {title}
-  </OptionStyle>
-);
-
 export default function SearchField(props: TextFieldProps) {
   const theme = useTheme();
-  const lessThan425 = useMediaQuery(theme.breakpoints.down("xxs"));
-  const lessThan480 = useMediaQuery(theme.breakpoints.down("xs"));
-  const [inputValue, setInputValue] = useState("");
+//   const lessThan425 = useMediaQuery(theme.breakpoints.down("xxs"));
+//   const lessThan480 = useMediaQuery(theme.breakpoints.down("xs"));
+  const [autoCompleteValue, setAutoCompleteValue] = useState("");
+
+  const OptionListStyle = styled("ul")({
+    backgroundColor: theme.palette.optionList.bgColor,
+  });
+
+  const OptionStyle = styled("li")({
+    "&:hover": {
+      backgroundColor: `${theme.palette.option.bgColor} !important`,
+    },
+  });
+
+  const renderOption = (
+    props: React.HTMLAttributes<HTMLLIElement>,
+    title: Film["title"],
+    state: AutocompleteRenderOptionState
+  ) => (
+    <OptionStyle
+      sx={{
+        backgroundColor: state.selected
+          ? `${theme.palette.autocomplete.selected} !important`
+          : `${theme.palette.autocomplete.unselected} !important`,
+        color: theme.palette.autocomplete.optionText,
+      }}
+      {...props}
+    >
+      {title}
+    </OptionStyle>
+  );
 
   return (
     <>
       <Autocomplete
-        size={lessThan480 ? "small" : "medium"}
-        inputValue={inputValue}
+        // size={lessThan480 ? "small" : "medium"}
+        inputValue={autoCompleteValue}
         onInputChange={(
           event: React.SyntheticEvent<Element, Event>,
           newValue
         ) => {
-          setInputValue(newValue);
+           setAutoCompleteValue(newValue);
         }}
         id="search-for-song"
         freeSolo={false}
@@ -123,17 +123,20 @@ export default function SearchField(props: TextFieldProps) {
             label={
               <Stack direction="row" gap={2} alignItems={"center"}>
                 <CreateSvgIcon
-                  sx={{ display: lessThan425 ? "none" : "block" }}
-                  fontSize={lessThan480 ? "small" : "medium"}
+                //   sx={{ display: lessThan425 ? "none" : "block" }}
+                //   fontSize={lessThan480 ? "small" : "medium"}
+                sx={{ display: "none" }}
                   icon={<SearchOutlinedIcon />}
                 />
                 <Typography
+                variant='h3'
                   sx={{
-                    [theme.breakpoints.down("xxs")]: { fontSize: ".8rem" },
-                    [theme.breakpoints.down("xxxs")]: {
-                      fontSize: "0.6rem",
-                      mt: 0.5,
-                    },
+                    // [theme.breakpoints.down("xxs")]: { fontSize: ".8rem" },
+                    // [theme.breakpoints.down("xxxs")]: {
+                    //   fontSize: "0.6rem",
+                    //   mt: 0.5,
+                    // },
+                    // fontSize: theme.typography.lol
                   }}
                 >
                   Search for song, artist, lyrics...
@@ -151,20 +154,20 @@ export default function SearchField(props: TextFieldProps) {
             border: "none",
           },
           "& .MuiAutocomplete-inputRoot": {
-            color: "#8C8C8C",
-            backgroundColor: "#1C1B1C",
+            color: theme.palette.autocomplete.valueText,
+            backgroundColor: theme.palette.autocomplete.inputBgColor,
           },
           "& .MuiAutocomplete-inputRoot.Mui-focused": {
             "& fieldset": {
-              border: inputValue ? "none" : "1px solid #8C8C8C",
+              border: autoCompleteValue ? "none" : `1px solid ${theme.palette.autocomplete.borderFocused}`,
             },
           },
           "& .MuiAutocomplete-endAdornment .MuiSvgIcon-root": {
-            color: "#8C8C8C",
+            color: theme.palette.autocomplete.endAdornment,
           },
           "& #search-for-song-label": {
-            color: "#8C8C8C",
-            display: inputValue ? "none" : "block",
+            color: theme.palette.autocomplete.label,
+            display: autoCompleteValue ? "none" : "block",
             ml: 1,
             // fontSize: lessthan380 ? "0.7rem" : lessThan480 ? "0.8rem" : "1rem",
           },

@@ -15,7 +15,7 @@ import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
 import CreateSvgIcon from "@/components/CreateSvgIcon";
-import { themedStyles } from "@/themeStyles/themeStyles";
+import { themedStyles } from "@/theme/themeStyles";
 
 interface NavDrawerProps {
   responsiveDrawerWidth: number;

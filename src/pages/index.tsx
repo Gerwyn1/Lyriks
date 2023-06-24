@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { Box, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import { themedStyles } from "@/themeStyles/themeStyles";
+import { themedStyles } from "@/theme/themeStyles";
 import NavDrawer from "@/components/NavDrawer";
 import SearchField from "@/components/SearchField";
 
@@ -12,10 +12,11 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   const theme = useTheme();
 
-  const greaterThan480 = useMediaQuery(theme.breakpoints.up("xs"));
-  
+  // const greaterThan480 = useMediaQuery(theme.breakpoints.up("xs"));
+
   const drawerWidth = 120;
-  const responsiveDrawerWidth = greaterThan480 ? drawerWidth : drawerWidth - 40;
+  // const responsiveDrawerWidth = greaterThan480 ? drawerWidth : drawerWidth - 40;
+  const responsiveDrawerWidth = true ? drawerWidth : drawerWidth - 40;
 
   return (
     <>

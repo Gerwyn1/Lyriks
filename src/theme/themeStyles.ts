@@ -4,7 +4,8 @@ const transitionDuration = 1000;
 
 export const themedStyles = (
   theme?: Theme,
-  mobileResponsiveWidth?: string | number
+  mobileResponsiveWidth?: string | number,
+  autoCompleteValue? : string
 ) => {
   return {
     drawer: {
