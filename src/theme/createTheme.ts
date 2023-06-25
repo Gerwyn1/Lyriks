@@ -1,54 +1,34 @@
+import React from "react";
 import {
   createTheme,
-  CustomTypographyOptions,
   responsiveFontSizes,
 } from "@mui/material/styles";
 import { TypographyProps } from "@mui/material/Typography";
 
-// interface CustomTypographyOptions extends TypographyProps {
-//   lol?: {
-//     fontSize?: string;
-//   };
-// }
-
-// interface CustomTypographyOptions {
-//     [lol: string]: TypographyProps["style"];
-//   }
-
-//   interface CustomTypographyOptions {
-//     [variant: string]: TypographyProps["style"];
-//   }
-
-//   interface TypographyProps {
-//     lol?: {
-//       fontSize?: string;
-//     };
-//   }
-
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     lol: true;
+    size: true;
+    fatSize: true;
   }
 }
+interface CustomTypographyOptions {
+    [variant: string]: TypographyProps["style"];
+  }
 
 declare module "@mui/material/styles" {
-    interface TypographyPropsOptionsOverrides {
-        lol: true;
-      }
-//   interface TypographyProps {
-//     lol?: {
-//       fontSize?: string;
-//     };
-//   }
+  interface TypographyVariants {
+    lol: React.CSSProperties;
+    size: React.CSSProperties;
+    fatSize: React.CSSProperties;
+  }
 
-//   interface CustomTypographyOptions {
-//     [variant: string]: TypographyProps["style"];
-//   }
+  interface TypographyVariantsOptions {
+    lol?: React.CSSProperties;
+    size?: React.CSSProperties;
+    fatSize?: React.CSSProperties;
+  }
 
-    interface CustomTypographyOptions {
-      [lol: string]: TypographyProps["style"];
-    }
-    
   interface BreakpointOverrides {
     xs: false;
     sm: false;
@@ -104,7 +84,32 @@ declare module "@mui/material/styles" {
   }
 }
 
+// export let theme = createTheme({
+//   breakpoints: {
+//     values: {
+//       mobileS: 320,
+//       mobileM: 375,
+//       mobileL: 425,
+//       tablet: 768,
+//       laptop: 1024,
+//       laptopL: 1440,
+//       laptopXL: 2560,
+//     },
+//   },
+// });
+
 export let theme = createTheme({
+    breakpoints: {
+        values: {
+          mobileS: 320,
+          mobileM: 375,
+          mobileL: 425,
+          tablet: 768,
+          laptop: 1024,
+          laptopL: 1440,
+          laptopXL: 2560,
+        },
+      },
   palette: {
     autocomplete: {
       inputBgColor: "#1C1B1C",
@@ -123,83 +128,46 @@ export let theme = createTheme({
       bgColor: "#555555",
     },
   },
-  breakpoints: {
-    values: {
-      mobileS: 320,
-      mobileM: 375,
-      mobileL: 425,
-      tablet: 768,
-      laptop: 1024,
-      laptopL: 1440,
-      laptopXL: 2560,
-    },
-  },
+
   typography: {
-    fontSize: 16,
-    lol: {
-      fontSize: ".5rem",
-    },
-    h1: {
-      fontSize: "3.5rem",
-    },
-    h2: {
-      fontSize: "3rem",
-    },
-    h3: {
-      fontSize: "2.5rem",
-    },
-    h4: {
-      fontSize: "2rem",
-    },
-    h5: {
+    fatSize: {
       fontSize: "1.5rem",
+      lineHeight: 1.5,
     },
-    h6: {
-      fontSize: "1.25rem",
+    size: {
+      lineHeight: 1.5,
+      fontSize: "3rem",
+    //   "@media (min-width: 700px)": {
+    //     fontSize: "1.5rem",
+    //   },
+    //   [theme.breakpoints.down("mobileM")]: {
+    //     fontSize: "2.5rem",
+    //   },
     },
-    subtitle1: {
-      fontSize: "1rem",
-    },
-    subtitle2: {
-      fontSize: "0.875rem",
-    },
-    body1: {
-      fontSize: "1rem",
-    },
-    body2: {
-      fontSize: "0.875rem",
-    },
-    caption: {
-      fontSize: "0.75rem",
-    },
-    button: {
-      fontSize: "0.875rem",
-    },
-    overline: {
-      fontSize: "0.75rem",
-    },
+    // lol: {
+    //   fontSize: "0.75rem",
+    //   "@media (min-width: 600px)": {
+    //     fontSize: "1.5rem",
+    //   },
+    //   [theme.breakpoints.down("mobileS")]: {
+    //     fontSize: "2.5rem",
+    //   },
+    // },
   } as CustomTypographyOptions,
-  components: {
-    MuiTypography: {
-      styleOverrides: {
-        lol: {
-          fontSize: ".5rem",
-        },
-      } as CustomTypographyOptions,
-    },
-  },
 });
 
-// theme = responsiveFontSizes(theme);
+theme = responsiveFontSizes(theme, {
+    breakpoints: [
+      "mobileS",
+      "mobileM",
+      "mobileL",
+      "tablet",
+      "laptop",
+      "laptopL",
+      "laptopXL",
+    ],
+  factor: 2, // The scaling factor for the font sizes
+  variants: ["h1", "h2", "body1", "size", "fatSize"] as any, // Specify the variants you want to make responsive
+});
 
-theme.typography.h3 = {
-    fontSize: '1.2rem',
-    '@media (min-width:600px)': {
-      fontSize: '1.5rem',
-    },
-    [theme.breakpoints.down('mobileM')]: {
-      fontSize: '2rem',
-    },
-  };
-
-
+// "lol",

@@ -129,15 +129,15 @@ export default function SearchField(props: TextFieldProps) {
                   icon={<SearchOutlinedIcon />}
                 />
                 <Typography
-                variant='h3'
-                  sx={{
-                    // [theme.breakpoints.down("xxs")]: { fontSize: ".8rem" },
-                    // [theme.breakpoints.down("xxxs")]: {
-                    //   fontSize: "0.6rem",
-                    //   mt: 0.5,
-                    // },
-                    // fontSize: theme.typography.lol
-                  }}
+                variant='h2'
+                //   sx={{
+                //     // [theme.breakpoints.down("xxs")]: { fontSize: ".8rem" },
+                //     // [theme.breakpoints.down("xxxs")]: {
+                //     //   fontSize: "0.6rem",
+                //     //   mt: 0.5,
+                //     // },
+                //     // fontSize: theme.typography.variants.customFontSize.fontSize,
+                //   }}
                 >
                   Search for song, artist, lyrics...
                 </Typography>
