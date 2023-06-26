@@ -1,32 +1,41 @@
 import React from "react";
-import {
-  createTheme,
-  responsiveFontSizes,
-} from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 import { TypographyProps } from "@mui/material/Typography";
+
+interface CustomTypographyOptions {
+  [variant: string]: TypographyProps["style"];
+}
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
-    lol: true;
-    size: true;
-    fatSize: true;
+    mobileS: true;
+    mobileM: true;
+    mobileL: true;
+    tablet: true;
+    laptop: true;
+    laptopL: true;
+    laptopXL: true;
   }
 }
-interface CustomTypographyOptions {
-    [variant: string]: TypographyProps["style"];
-  }
-
 declare module "@mui/material/styles" {
   interface TypographyVariants {
-    lol: React.CSSProperties;
-    size: React.CSSProperties;
-    fatSize: React.CSSProperties;
+    mobileS: React.CSSProperties;
+    mobileM: React.CSSProperties;
+    mobileL: React.CSSProperties;
+    tablet: React.CSSProperties;
+    laptop: React.CSSProperties;
+    laptopL: React.CSSProperties;
+    laptopXL: React.CSSProperties;
   }
 
   interface TypographyVariantsOptions {
-    lol?: React.CSSProperties;
-    size?: React.CSSProperties;
-    fatSize?: React.CSSProperties;
+    mobileS?: React.CSSProperties;
+    mobileM?: React.CSSProperties;
+    mobileL?: React.CSSProperties;
+    tablet?: React.CSSProperties;
+    laptop?: React.CSSProperties;
+    laptopL?: React.CSSProperties;
+    laptopXL?: React.CSSProperties;
   }
 
   interface BreakpointOverrides {
@@ -45,6 +54,13 @@ declare module "@mui/material/styles" {
   }
 
   interface Palette {
+    midnightBlack: string;
+    slateSteel: string;
+    charcoal: string;
+    silverSlate: string;
+    shadowGraphite: string;
+    white: string;
+
     autocomplete: {
       inputBgColor: string;
       selected: string;
@@ -65,7 +81,14 @@ declare module "@mui/material/styles" {
   }
 
   interface PaletteOptions {
-    autocomplete: {
+    midnightBlack?: string;
+    slateSteel?: string;
+    charcoal?: string;
+    silverSlate?: string;
+    shadowGraphite?: string;
+    white?: string;
+
+    autocomplete?: {
       inputBgColor: string;
       selected: string;
       unselected: string;
@@ -75,99 +98,64 @@ declare module "@mui/material/styles" {
       endAdornment: string;
       label: string;
     };
-    optionList: {
+    optionList?: {
       bgColor: string;
     };
-    option: {
+    option?: {
       bgColor: string;
     };
   }
 }
 
-// export let theme = createTheme({
-//   breakpoints: {
-//     values: {
-//       mobileS: 320,
-//       mobileM: 375,
-//       mobileL: 425,
-//       tablet: 768,
-//       laptop: 1024,
-//       laptopL: 1440,
-//       laptopXL: 2560,
-//     },
-//   },
-// });
-
 export let theme = createTheme({
-    breakpoints: {
-        values: {
-          mobileS: 320,
-          mobileM: 375,
-          mobileL: 425,
-          tablet: 768,
-          laptop: 1024,
-          laptopL: 1440,
-          laptopXL: 2560,
-        },
-      },
+  palette: {
+    midnightBlack: "#1C1B1C",
+    slateSteel: "#333333",
+    charcoal: "#252525",
+    silverSlate: "#8C8C8C",
+    shadowGraphite: "#555555",
+    white: "#fff",
+  },
+});
+
+theme = createTheme({
+  breakpoints: {
+    values: {
+      mobileS: 320,
+      mobileM: 375,
+      mobileL: 425,
+      tablet: 768,
+      laptop: 1024,
+      laptopL: 1440,
+      laptopXL: 2560,
+    },
+  },
   palette: {
     autocomplete: {
-      inputBgColor: "#1C1B1C",
-      selected: "#333333",
-      unselected: "#252525",
-      valueText: "#8C8C8C",
-      optionText: "#fff",
-      borderFocused: "#8C8C8C",
-      endAdornment: "#8C8C8C",
-      label: "#8C8C8C",
+      optionText: theme.palette.white,
+      selected: theme.palette.slateSteel,
+      unselected: theme.palette.charcoal,
+      inputBgColor: theme.palette.midnightBlack,
+      label: theme.palette.silverSlate,
+      valueText: theme.palette.silverSlate,
+      endAdornment: theme.palette.silverSlate,
+      borderFocused: theme.palette.silverSlate,
     },
     optionList: {
-      bgColor: "#252525",
+      bgColor: theme.palette.charcoal,
     },
     option: {
-      bgColor: "#555555",
+      bgColor: theme.palette.shadowGraphite,
     },
   },
 
   typography: {
-    fatSize: {
-      fontSize: "1.5rem",
-      lineHeight: 1.5,
-    },
-    size: {
-      lineHeight: 1.5,
-      fontSize: "3rem",
-    //   "@media (min-width: 700px)": {
-    //     fontSize: "1.5rem",
-    //   },
-    //   [theme.breakpoints.down("mobileM")]: {
-    //     fontSize: "2.5rem",
-    //   },
-    },
-    // lol: {
-    //   fontSize: "0.75rem",
-    //   "@media (min-width: 600px)": {
-    //     fontSize: "1.5rem",
-    //   },
-    //   [theme.breakpoints.down("mobileS")]: {
-    //     fontSize: "2.5rem",
-    //   },
-    // },
+    mobileS: ".6rem",
+    mobileM: "1rem",
+    mobileL: "3.8rem",
+    tablet: "3.8rem",
+    laptop: "3.8rem",
+    laptopL: "3.8rem",
+    laptopXL: "3.8rem",
   } as CustomTypographyOptions,
 });
-
-theme = responsiveFontSizes(theme, {
-    breakpoints: [
-      "mobileS",
-      "mobileM",
-      "mobileL",
-      "tablet",
-      "laptop",
-      "laptopL",
-      "laptopXL",
-    ],
-  factor: 2, // The scaling factor for the font sizes
-  variants: ["h1", "h2", "body1", "size", "fatSize"] as any, // Specify the variants you want to make responsive
-});
-
-// "lol",

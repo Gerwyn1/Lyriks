@@ -4,18 +4,11 @@ import { Box, Drawer, List, ListItem, SxProps, Theme } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 import AudiotrackOutlinedIcon from "@mui/icons-material/AudiotrackOutlined";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
-import KeyboardVoiceOutlinedIcon from "@mui/icons-material/KeyboardVoiceOutlined";
-import MovingOutlinedIcon from "@mui/icons-material/MovingOutlined";
-import VerticalAlignBottomOutlinedIcon from "@mui/icons-material/VerticalAlignBottomOutlined";
-import TocOutlinedIcon from "@mui/icons-material/TocOutlined";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
-import CreateSvgIcon from "@/components/CreateSvgIcon";
 import { themedStyles } from "@/theme/themeStyles";
+import { navDrawerItems } from "@/utils/Data";
 
 interface NavDrawerProps {
   responsiveDrawerWidth: number;
@@ -48,50 +41,7 @@ export default function NavDrawer({ responsiveDrawerWidth }: NavDrawerProps) {
           >
             <AudiotrackOutlinedIcon />
           </ListItem>
-          {[
-            {
-              text: "Home Icon",
-              icon: <CreateSvgIcon icon={<HomeOutlinedIcon />} />,
-              route: "/",
-            },
-            {
-              text: "Search Icon",
-              icon: <CreateSvgIcon icon={<SearchOutlinedIcon />} />,
-              route: "/search",
-            },
-            {
-              text: "Favorites Icon",
-              icon: <CreateSvgIcon icon={<FavoriteBorderOutlinedIcon />} />,
-              route: "/favorites",
-            },
-            {
-              text: "Voice Icon",
-              icon: <CreateSvgIcon icon={<KeyboardVoiceOutlinedIcon />} />,
-              route: "/voice",
-            },
-            {
-              text: "Moving Icon",
-              icon: <CreateSvgIcon icon={<MovingOutlinedIcon />} />,
-              route: "/moving",
-            },
-            {
-              text: "Download Icon",
-              icon: (
-                <CreateSvgIcon icon={<VerticalAlignBottomOutlinedIcon />} />
-              ),
-              route: "/download",
-            },
-            {
-              text: "Toc Icon",
-              icon: <CreateSvgIcon icon={<TocOutlinedIcon />} />,
-              route: "/toc",
-            },
-            {
-              text: "Add Icon",
-              icon: <CreateSvgIcon icon={<AddOutlinedIcon />} />,
-              route: "/add",
-            },
-          ].map((nav) => (
+          {navDrawerItems.map((nav) => (
             <ListItem
               key={nav.text}
               sx={{

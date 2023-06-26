@@ -11,12 +11,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const theme = useTheme();
-
-  // const greaterThan480 = useMediaQuery(theme.breakpoints.up("xs"));
-
+  const greaterThan425 = useMediaQuery(theme.breakpoints.up("mobileL"));
   const drawerWidth = 120;
-  // const responsiveDrawerWidth = greaterThan480 ? drawerWidth : drawerWidth - 40;
-  const responsiveDrawerWidth = true ? drawerWidth : drawerWidth - 40;
+  const responsiveDrawerWidth = greaterThan425 ? drawerWidth : drawerWidth - 40;
 
   return (
     <>

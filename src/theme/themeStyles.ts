@@ -5,7 +5,7 @@ const transitionDuration = 1000;
 export const themedStyles = (
   theme?: Theme,
   mobileResponsiveWidth?: string | number,
-  autoCompleteValue? : string
+  autoCompleteValue?: string
 ) => {
   return {
     drawer: {
@@ -50,6 +50,6 @@ export const themedStyles = (
     },
     lastListItem: {
       transform: "rotate(180deg)",
-    }
+    },
   };
 };
