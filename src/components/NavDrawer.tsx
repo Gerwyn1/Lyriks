@@ -11,7 +11,7 @@ import { themedStyles } from "@/theme/themeStyles";
 import { navDrawerItems } from "@/utils/Data";
 
 interface NavDrawerProps {
-  responsiveDrawerWidth: number;
+  responsiveDrawerWidth: number | string;
 }
 
 export default function NavDrawer({ responsiveDrawerWidth }: NavDrawerProps) {
@@ -20,7 +20,6 @@ export default function NavDrawer({ responsiveDrawerWidth }: NavDrawerProps) {
 
   return (
     <Drawer
-      disableEnforceFocus={false}
       variant="permanent"
       open
       sx={themedStyles().drawer}
@@ -30,12 +29,12 @@ export default function NavDrawer({ responsiveDrawerWidth }: NavDrawerProps) {
       }}
     >
       <Box display="flex" justifyContent="center">
-        <List sx={themedStyles().list}>
+        <List sx={themedStyles().drawerList}>
           <ListItem
             sx={{
               "& .MuiSvgIcon-root": {
-                ...themedStyles().firstListItem,
-                ...themedStyles(theme).listItem,
+                ...themedStyles().drawerFirstItem,
+                ...themedStyles(theme).drawerItem,
               },
             }}
           >
@@ -46,7 +45,7 @@ export default function NavDrawer({ responsiveDrawerWidth }: NavDrawerProps) {
               key={nav.text}
               sx={{
                 "& .MuiSvgIcon-root": {
-                  ...themedStyles(theme).listItem,
+                  ...themedStyles(theme).drawerItem,
                   color: selectIcon === nav.text ? "#fff" : "#898989",
                 },
               }}
@@ -60,8 +59,8 @@ export default function NavDrawer({ responsiveDrawerWidth }: NavDrawerProps) {
               position: "absolute",
               bottom: 5,
               "& .MuiSvgIcon-root": {
-                ...themedStyles().lastListItem,
-                ...themedStyles(theme).listItem,
+                ...themedStyles().drawerLastItem,
+                ...themedStyles(theme).drawerItem,
                 color: selectIcon === "Exit Icon" ? "#fff" : "#898989",
               },
             }}
