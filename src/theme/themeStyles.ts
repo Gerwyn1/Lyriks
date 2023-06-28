@@ -1,21 +1,30 @@
 import { Theme } from "@mui/material/styles";
 
 const transitionDuration = 1000;
-
 interface VariablesProps {
   responsiveDrawerWidth?: string | number;
+  nav?: { text: string };
+  navIcon?: string;
   autocompleteValue?: string;
-  state?: {selected : boolean};
+  state?: { selected: boolean };
 }
 
 export const themedStyles = (
   theme?: Theme,
   {
     responsiveDrawerWidth,
+    nav: { text: navText } = { text: "" },
+    navIcon,
     autocompleteValue,
-    state: { selected: autocompleteSelected } = {selected: false},
+    state: { selected: autocompleteSelected } = { selected: false },
   }: VariablesProps = {}
 ) => {
+  const drawerItemSvg = {
+    p: "6px",
+    width: theme?.spacing(5),
+    height: theme?.spacing(5),
+  };
+
   return {
     drawer: {
       "& .MuiBackdrop-root": {
@@ -48,17 +57,27 @@ export const themedStyles = (
       minHeight: "100vh",
     },
     drawerItem: {
-      p: "6px",
-      width: theme?.spacing(5),
-      height: theme?.spacing(5),
+      "& .MuiSvgIcon-root": {
+        ...drawerItemSvg,
+        color: navIcon === navText ? "#fff" : "#898989",
+      },
     },
     drawerFirstItem: {
-      color: "#fff",
-      borderRadius: "50%",
-      backgroundColor: "#00B3FF",
+      "& .MuiSvgIcon-root": {
+        ...drawerItemSvg,
+        color: "#fff",
+        borderRadius: "50%",
+        backgroundColor: "#00B3FF",
+      },
     },
     drawerLastItem: {
-      transform: "rotate(180deg)",
+      position: "absolute",
+      bottom: 5,
+      "& .MuiSvgIcon-root": {
+        ...drawerItemSvg,
+        transform: "rotate(180deg)",
+        color: navIcon === "Exit Icon" ? "#fff" : "#898989",
+      },
     },
     autocomplete: {
       "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
