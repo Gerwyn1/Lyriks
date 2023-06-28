@@ -22,9 +22,9 @@ export default function NavDrawer({ responsiveDrawerWidth }: NavDrawerProps) {
     <Drawer
       variant="permanent"
       open
-      sx={themedStyles().drawer}
+      sx={themedStyles(theme).drawer}
       PaperProps={{
-        sx: themedStyles(theme, responsiveDrawerWidth)
+        sx: themedStyles(theme, { responsiveDrawerWidth })
           .drawerPaper as SxProps<Theme>,
       }}
     >

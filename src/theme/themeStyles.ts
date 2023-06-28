@@ -2,10 +2,19 @@ import { Theme } from "@mui/material/styles";
 
 const transitionDuration = 1000;
 
+interface VariablesProps {
+  responsiveDrawerWidth?: string | number;
+  autocompleteValue?: string;
+  state?: {selected : boolean};
+}
+
 export const themedStyles = (
   theme?: Theme,
-  mobileResponsiveWidth?: string | number,
-  autocompleteValue?: string
+  {
+    responsiveDrawerWidth,
+    autocompleteValue,
+    state: { selected: autocompleteSelected } = {selected: false},
+  }: VariablesProps = {}
 ) => {
   return {
     drawer: {
@@ -14,13 +23,13 @@ export const themedStyles = (
       },
     },
     drawerPaper: {
-      width: mobileResponsiveWidth,
+      width: responsiveDrawerWidth,
       backgroundColor: "#131313",
       overflowX: "hidden",
     },
     content: {
       padding: 16,
-      minWidth: mobileResponsiveWidth,
+      minWidth: responsiveDrawerWidth,
       marginLeft: 0,
       transition: theme?.transitions.create("margin", {
         easing: theme?.transitions.easing.easeOut,
@@ -28,8 +37,8 @@ export const themedStyles = (
       }),
     },
     contentShift: {
-      minWidth: mobileResponsiveWidth,
-      marginLeft: mobileResponsiveWidth,
+      minWidth: responsiveDrawerWidth,
+      marginLeft: responsiveDrawerWidth,
       transition: theme?.transitions.create("margin", {
         easing: theme?.transitions.easing.easeOut,
         duration: transitionDuration,
@@ -102,6 +111,9 @@ export const themedStyles = (
       "&:hover": {
         backgroundColor: `${theme?.palette.option.bgColor} !important`,
       },
+      backgroundColor: autocompleteSelected
+        ? `${theme?.palette.autocomplete.selected} !important`
+        : `${theme?.palette.autocomplete.unselected} !important`,
     },
   };
 };

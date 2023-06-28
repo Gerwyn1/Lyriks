@@ -34,8 +34,8 @@ export default function Home() {
         <Box
           mt={2}
           style={{
-            ...themedStyles(theme, responsiveDrawerWidth).content,
-            ...themedStyles(theme, responsiveDrawerWidth).contentShift,
+            ...themedStyles(theme, {responsiveDrawerWidth}).content,
+            ...themedStyles(theme, {responsiveDrawerWidth}).contentShift,
           }}
         >
           <SearchField lessThan425={lessThan425} />

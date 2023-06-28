@@ -45,12 +45,7 @@ export default function SearchField({
     state: AutocompleteRenderOptionState
   ) => (
     <ListItem
-      sx={{
-        backgroundColor: state.selected
-          ? `${theme.palette.autocomplete.selected} !important`
-          : `${theme.palette.autocomplete.unselected} !important`,
-        ...themedStyles(theme, undefined, autocompleteValue).autocompleteOption,
-      }}
+      sx={themedStyles(theme, { autocompleteValue, state }).autocompleteOption}
       {...props}
     >
       {title}
@@ -89,9 +84,7 @@ export default function SearchField({
         ListboxProps={{
           className: styles.autoCompleteListbox,
         }}
-        sx={{
-          ...themedStyles(theme, undefined, autocompleteValue).autocomplete
-        }}
+        sx={themedStyles(theme, { autocompleteValue }).autocomplete}
       />
     </>
   );
