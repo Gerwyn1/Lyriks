@@ -7,6 +7,7 @@ import { themedStyles } from "@/theme/themeStyles";
 import NavDrawer from "@/components/NavDrawer";
 import SearchField from "@/components/SearchField";
 import User from "@/components/User";
+import UserMenu from "@/components/UserMenu";
 
 const inter = Inter({ subsets: ["latin"] }) as unknown as string;
 
@@ -46,6 +47,7 @@ export default function Home() {
             <User />
           </Stack>
         </Box>
+        {/* <UserMenu /> */}
       </main>
     </>
   );

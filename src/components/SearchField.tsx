@@ -9,6 +9,8 @@ import {
   AutocompleteRenderOptionState,
   List,
   ListItem,
+  Paper,
+  AutocompleteRenderInputParams,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -35,10 +37,6 @@ export default function SearchField({
 
   console.log(autocompleteValue);
 
-  const StyledList = styled(List)({
-    backgroundColor: theme.palette.optionList.bgColor,
-  });
-
   const renderOption = (
     props: React.HTMLAttributes<HTMLLIElement>,
     title: Film["title"],
@@ -52,38 +50,41 @@ export default function SearchField({
     </ListItem>
   );
 
+  const renderInput = (params: AutocompleteRenderInputParams) => (
+    <TextField
+      {...params}
+      label={
+        <Stack direction="row" gap={lessThan425 ? 1 : 2} alignItems={"center"}>
+          <CreateSvgIcon icon={<SearchOutlinedIcon />} />
+          <Typography noWrap>Search for song, artist, lyrics...</Typography>
+        </Stack>
+      }
+    />
+  );
+
   return (
-      <Autocomplete
-        size={lessThan425 ? "small" : "medium"}
-        inputValue={autocompleteValue}
-        onInputChange={(_, newValue) => setAutocompleteValue(newValue)}
-        id="search-for-song"
-        freeSolo={false}
-        clearOnEscape={true}
-        options={top100Films.map((film) => film.title)}
-        renderOption={renderOption}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label={
-              <Stack
-                direction="row"
-                gap={lessThan425 ? 1 : 2}
-                alignItems={"center"}
-              >
-                <CreateSvgIcon icon={<SearchOutlinedIcon />} />
-                <Typography noWrap>
-                  Search for song, artist, lyrics...
-                </Typography>
-              </Stack>
-            }
-          />
-        )}
-        ListboxComponent={StyledList}
-        ListboxProps={{
-          className: styles.autoCompleteListbox,
-        }}
-        sx={themedStyles(theme, { autocompleteValue }).autocomplete}
-      />
+    <Autocomplete
+      size={lessThan425 ? "small" : "medium"}
+      inputValue={autocompleteValue}
+      onInputChange={(_, newValue) => setAutocompleteValue(newValue)}
+      id="search-for-song"
+      freeSolo={false}
+      clearOnEscape={true}
+      options={top100Films.map((film) => film.title)}
+      renderOption={renderOption}
+      renderInput={renderInput}
+      PaperComponent={styled(Paper)({
+        background: "transparent",
+        borderRadius: "30px",
+      })}
+      ListboxComponent={styled(List)({
+        backgroundColor: theme.palette.optionList.bgColor,
+        borderRadius: theme?.typography.pxToRem(30),
+      })}
+      ListboxProps={{
+        className: styles.autoCompleteListbox,
+      }}
+      sx={themedStyles(theme, { autocompleteValue }).autocomplete}
+    />
   );
 }

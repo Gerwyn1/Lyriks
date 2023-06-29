@@ -92,6 +92,7 @@ export const themedStyles = (
       "& .MuiAutocomplete-inputRoot": {
         color: theme?.palette.autocomplete.valueText,
         backgroundColor: theme?.palette.autocomplete.inputBgColor,
+        borderRadius: theme?.typography.pxToRem(30),
       },
       "& .MuiAutocomplete-inputRoot.Mui-focused": {
         "& fieldset": {
@@ -140,7 +141,7 @@ export const themedStyles = (
         ? `${theme?.palette.autocomplete.selected} !important`
         : `${theme?.palette.autocomplete.unselected} !important`,
     },
-    // stop abstracting color palatte for the following styles below
+    // stop abstracting color palatte for the following styles below onwards
     notificationUnread: {
       width: 8,
       height: 8,
