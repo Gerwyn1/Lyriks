@@ -73,12 +73,22 @@ declare module "@mui/material/styles" {
   }
 
   interface Palette {
+    white: string;
     midnightBlack: string;
     slateSteel: string;
     charcoal: string;
     silverSlate: string;
     shadowGraphite: string;
-    white: string;
+    moonstoneMist: string;
+    deepSkyBlue: string;
+    midnightShadow: string;
+
+    drawer: {
+      paper: string;
+      firstIconBgColor: string;
+      selected: string;
+      unselected: string;
+    };
 
     autocomplete: {
       inputBgColor: string;
@@ -100,12 +110,22 @@ declare module "@mui/material/styles" {
   }
 
   interface PaletteOptions {
+    white?: string;
     midnightBlack?: string;
     slateSteel?: string;
     charcoal?: string;
     silverSlate?: string;
     shadowGraphite?: string;
-    white?: string;
+    moonstoneMist?: string;
+    deepSkyBlue?: string;
+    midnightShadow?: string;
+
+    drawer?: {
+      paper: string;
+      firstIconBgColor: string;
+      selected: string;
+      unselected: string;
+    };
 
     autocomplete?: {
       inputBgColor: string;
@@ -128,12 +148,15 @@ declare module "@mui/material/styles" {
 
 export let theme = createTheme({
   palette: {
+    white: "#fff",
     midnightBlack: "#1C1B1C",
     slateSteel: "#333333",
     charcoal: "#252525",
     silverSlate: "#8C8C8C",
     shadowGraphite: "#555555",
-    white: "#fff",
+    moonstoneMist: "#898989",
+    deepSkyBlue: "#00B3FF",
+    midnightShadow: "#131313",
   },
 });
 
@@ -151,6 +174,12 @@ theme = createTheme({
     },
   },
   palette: {
+    drawer: {
+      paper: theme.palette.midnightShadow,
+      firstIconBgColor: theme.palette.deepSkyBlue,
+      selected: theme.palette.moonstoneMist,
+      unselected: theme.palette.white,
+    },
     autocomplete: {
       optionText: theme.palette.white,
       selected: theme.palette.slateSteel,

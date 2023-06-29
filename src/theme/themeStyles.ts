@@ -33,7 +33,7 @@ export const themedStyles = (
     },
     drawerPaper: {
       width: responsiveDrawerWidth,
-      backgroundColor: "#131313",
+      backgroundColor: theme?.palette.drawer.paper,
       overflowX: "hidden",
     },
     content: {
@@ -59,15 +59,18 @@ export const themedStyles = (
     drawerItem: {
       "& .MuiSvgIcon-root": {
         ...drawerItemSvg,
-        color: navIcon === navText ? "#fff" : "#898989",
+        color:
+          navIcon === navText
+            ? theme?.palette.drawer.unselected
+            : theme?.palette.drawer.selected,
       },
     },
     drawerFirstItem: {
       "& .MuiSvgIcon-root": {
         ...drawerItemSvg,
-        color: "#fff",
+        color: theme?.palette.drawer.unselected,
         borderRadius: "50%",
-        backgroundColor: "#00B3FF",
+        backgroundColor: theme?.palette.drawer.firstIconBgColor,
       },
     },
     drawerLastItem: {
@@ -76,7 +79,10 @@ export const themedStyles = (
       "& .MuiSvgIcon-root": {
         ...drawerItemSvg,
         transform: "rotate(180deg)",
-        color: navIcon === "Exit Icon" ? "#fff" : "#898989",
+        color:
+          navIcon === "Exit Icon"
+            ? theme?.palette.drawer.unselected
+            : theme?.palette.drawer.selected,
       },
     },
     autocomplete: {
