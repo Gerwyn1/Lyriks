@@ -1,11 +1,12 @@
 import Head from "next/head";
 import { Inter } from "next/font/google";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, Stack, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
 import { themedStyles } from "@/theme/themeStyles";
 import NavDrawer from "@/components/NavDrawer";
 import SearchField from "@/components/SearchField";
+import User from "@/components/User";
 
 const inter = Inter({ subsets: ["latin"] }) as unknown as string;
 
@@ -34,11 +35,16 @@ export default function Home() {
         <Box
           mt={2}
           style={{
-            ...themedStyles(theme, {responsiveDrawerWidth}).content,
-            ...themedStyles(theme, {responsiveDrawerWidth}).contentShift,
+            ...themedStyles(theme, { responsiveDrawerWidth }).content,
+            ...themedStyles(theme, { responsiveDrawerWidth }).contentShift,
           }}
         >
-          <SearchField lessThan425={lessThan425} />
+          <Stack gap={2} direction="row">
+            <Box flex={1}>
+              <SearchField lessThan425={lessThan425} />
+            </Box>
+            <User />
+          </Stack>
         </Box>
       </main>
     </>

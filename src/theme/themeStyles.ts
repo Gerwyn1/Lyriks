@@ -140,5 +140,16 @@ export const themedStyles = (
         ? `${theme?.palette.autocomplete.selected} !important`
         : `${theme?.palette.autocomplete.unselected} !important`,
     },
+    // stop abstracting color palatte for the following styles below
+    notificationUnread: {
+      width: 8,
+      height: 8,
+      borderRadius: "50%",
+      backgroundColor: "#00B2FF",
+      position: "absolute",
+      top: 3,
+      right: 3,
+    },
+    //
   };
 };

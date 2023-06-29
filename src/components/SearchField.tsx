@@ -53,7 +53,6 @@ export default function SearchField({
   );
 
   return (
-    <>
       <Autocomplete
         size={lessThan425 ? "small" : "medium"}
         inputValue={autocompleteValue}
@@ -86,6 +85,5 @@ export default function SearchField({
         }}
         sx={themedStyles(theme, { autocompleteValue }).autocomplete}
       />
-    </>
   );
 }
