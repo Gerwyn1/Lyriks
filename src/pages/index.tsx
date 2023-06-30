@@ -7,7 +7,6 @@ import { themedStyles } from "@/theme/themeStyles";
 import NavDrawer from "@/components/NavDrawer";
 import SearchField from "@/components/SearchField";
 import User from "@/components/User";
-import UserMenu from "@/components/UserMenu";
 
 const inter = Inter({ subsets: ["latin"] }) as unknown as string;
 
@@ -15,6 +14,7 @@ export default function Home() {
   const theme = useTheme();
   const lessThan320 = useMediaQuery(theme.breakpoints.down("mobileS"));
   const lessThan425 = useMediaQuery(theme.breakpoints.down("mobileL"));
+  const lessThan480 = useMediaQuery(theme.breakpoints.down("mobileXL"));
 
   const responsiveDrawerWidth = lessThan320
     ? theme.typography.pxToRem(60)
@@ -44,10 +44,9 @@ export default function Home() {
             <Box flex={1}>
               <SearchField lessThan425={lessThan425} />
             </Box>
-            <User />
+            <User lessThan425={lessThan425}/>
           </Stack>
         </Box>
-        {/* <UserMenu /> */}
       </main>
     </>
   );

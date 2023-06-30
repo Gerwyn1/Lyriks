@@ -152,5 +152,10 @@ export const themedStyles = (
       right: 3,
     },
     //
+    userMenuPaper: {
+      backgroundColor: theme?.palette.autocomplete.inputBgColor,
+      color: "#fff",
+      borderRadius: theme?.typography.pxToRem(15),
+    },
   };
 };

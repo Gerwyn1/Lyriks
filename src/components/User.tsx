@@ -1,31 +1,40 @@
 import React from "react";
-import { Box, Stack, Avatar, Typography } from "@mui/material";
+import { Box, Stack, Avatar, Typography, useTheme } from "@mui/material";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 
-import CreateSvgIcon from "@/components/CreateSvgIcon";
 import { themedStyles } from "@/theme/themeStyles";
+import UserMenu from "./UserMenu";
 
-interface UserProps {}
+interface UserProps {
+    lessThan425: boolean;
+}
 
-export default function User() {
+export default function User({ lessThan425 }: UserProps) {
+  const theme = useTheme();
   return (
     <Stack direction="row" alignItems="center" gap={2}>
       <Box sx={{ position: "relative" }}>
-        <Box
-          sx={themedStyles().notificationUnread}
-        ></Box>
-        <NotificationsNoneOutlinedIcon />
+        <Box sx={themedStyles().notificationUnread}></Box>
+        <NotificationsNoneOutlinedIcon sx={{ cursor: "pointer" }} />
       </Box>
       <Stack direction="row" gap={1} alignItems="center">
         <Box>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          <Avatar
+            sx={{
+              width: lessThan425
+                ? theme?.typography.pxToRem(24)
+                : theme?.typography.pxToRem(40),
+              height: lessThan425
+                ? theme?.typography.pxToRem(24)
+                : theme?.typography.pxToRem(40),
+            }}
+            sizes="small"
+            alt="Travis Howard"
+            src="/static/images/avatar/2.jpg"
+          />
         </Box>
-        <Typography>Alex</Typography>
-        <CreateSvgIcon
-          sx={{ color: "#858586" }}
-          icon={<ExpandMoreOutlinedIcon />}
-        />
+        <Typography>Travis</Typography>
+        <UserMenu />
       </Stack>
     </Stack>
   );

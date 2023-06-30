@@ -1,18 +1,23 @@
+import React from "react";
 import {
-  Stack,
   Paper,
   MenuList,
   MenuItem,
-  Button,
   Popper,
   Grow,
   ClickAwayListener,
+  Box,
+  useTheme,
 } from "@mui/material";
-import React from "react";
+import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
+
+import CreateSvgIcon from "@/components/CreateSvgIcon";
+import { themedStyles } from "@/theme/themeStyles";
 
 interface UserMenuProps {}
 
 export default function UserMenu() {
+  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
@@ -49,60 +54,67 @@ export default function UserMenu() {
 
     prevOpen.current = open;
   }, [open]);
+
+  const MenuItems = () => {
+    return ["Profile", "My account", "Logout"].map((option) => (
+      <MenuItem
+        key={option}
+        onClick={handleClose}
+        sx={{
+          "&:hover": {
+            backgroundColor: theme.palette.option.bgColor,
+          },
+        }}
+      >
+        {option}
+      </MenuItem>
+    ));
+  };
+
   return (
-    <Stack direction="row" spacing={2}>
-      <Paper>
-        <MenuList>
-          <MenuItem>Profile</MenuItem>
-          <MenuItem>My account</MenuItem>
-          <MenuItem>Logout</MenuItem>
-        </MenuList>
-      </Paper>
-      <div>
-        <Button
-          ref={anchorRef}
+    <>
+      <Box ref={anchorRef} height="1.5rem">
+        <CreateSvgIcon
+          sx={{ color: "#858586", cursor: "pointer" }}
+          icon={<ExpandMoreOutlinedIcon />}
           id="composition-button"
           aria-controls={open ? "composition-menu" : undefined}
           aria-expanded={open ? "true" : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
-        >
-          Dashboard
-        </Button>
-        <Popper
-          open={open}
-          anchorEl={anchorRef.current}
-          role={undefined}
-          placement="bottom-start"
-          transition
-          disablePortal
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                transformOrigin:
-                  placement === "bottom-start" ? "left top" : "left bottom",
-              }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList
-                    autoFocusItem={open}
-                    id="composition-menu"
-                    aria-labelledby="composition-button"
-                    onKeyDown={handleListKeyDown}
-                  >
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
-                    <MenuItem onClick={handleClose}>My account</MenuItem>
-                    <MenuItem onClick={handleClose}>Logout</MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-      </div>
-    </Stack>
+        />
+      </Box>
+      <Popper
+        open={open}
+        anchorEl={anchorRef.current}
+        role={undefined}
+        placement="bottom-start"
+        transition
+        disablePortal
+      >
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin:
+                placement === "bottom-start" ? "right top" : "right top",
+            }}
+          >
+            <Paper sx={themedStyles(theme).userMenuPaper}>
+              <ClickAwayListener onClickAway={handleClose}>
+                <MenuList
+                  autoFocusItem={open}
+                  id="composition-menu"
+                  aria-labelledby="composition-button"
+                  onKeyDown={handleListKeyDown}
+                >
+                  <MenuItems />
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
+    </>
   );
 }
